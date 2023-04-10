@@ -1,0 +1,44 @@
+def check_price():
+    
+    URL = 'https://www.amazon.de/-/en/Funny-Systems-Business-Analyst-T-Shirt/dp/B09F32Q8J8/ref=sr_1_7?crid=2OWYCOL4LTSSI&keywords=data%2Banalyst%2Btshirt&qid=1680970621&sprefix=Data%2Banalyst%2B%2Caps%2C113&sr=8-7'
+
+    headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36", "Accept-Encoding": "gzip, deflate, br", "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7", "DNT":"1","Connection":"close", "Upgrade-Insecure-Requests":"1"}
+
+    page = requests.get(URL, headers=headers)
+
+    soup1 = BeautifulSoup(page.content, "html.parser")
+
+    soup2 = BeautifulSoup(soup1.prettify(), "html.parser")
+
+    title = soup2.find(id='productTitle').get_text()
+
+    rating = soup2.find(id='averageCustomerReviews').get_text()
+
+    price = soup2.find(id='corePriceDisplay_desktop_feature_div').get_text()
+
+    types1 = soup2.find(id='fit_type_0').get_text()
+
+    types2 = soup2.find(id='fit_type_1').get_text()
+
+    types3 = soup2.find(id='fit_type_2').get_text()
+    
+    title = title.strip()
+    rating =rating.strip()[0:18]
+    price = price.strip()[1:6]
+    types1 = types1.strip()
+    types2 = types2.strip()
+    types3 = types3.strip()
+    
+    import datetime
+
+    datetime.date.today()
+    
+    import csv
+
+    header = ['Date', 'Title', 'Rating', 'Price', 'Gender Type']
+
+    data = [today, title, rating, price, types1, types2, types3]
+
+    with open('Amazonweb.csv', 'w', newline='', encoding='UTF8') as f:
+        writer = csv.writer(f)
+        writer.writerow(data)
