@@ -1,0 +1,10 @@
+import csv
+
+header = ['Date', 'Title', 'Rating', 'Price', 'Gender Type']
+
+data = [today, title, rating, price, types1, types2, types3]
+
+with open('Amazonweb.csv', 'w', newline='', encoding='UTF8') as f:
+    writer = csv.writer(f)
+    writer.writerow(header)
+    writer.writerow(data)
