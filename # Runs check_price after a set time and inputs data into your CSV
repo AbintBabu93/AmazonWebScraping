@@ -1,0 +1,3 @@
+while(True):
+    check_price
+    time.sleep(500)
